@@ -35,7 +35,12 @@ namespace LinkedListImplementation
 
         public override void InsertFirst(int value)
         {
-            throw new NotImplementedException();
+            Node newHead = new Node() { Data = value };
+            Node tmpHead = this.Head;
+            newHead.Next = this.Head;
+            this.Head = newHead;
+            this.Size++;
+
         }
 
         public override void InsertLast(int value)

@@ -14,7 +14,6 @@ namespace LinkedListUnitTestProject
             Node n2 = new Node() { Data = 2 };
             n1.Next = n2;
             n2.Next = null;
-            
 
             LinkedList list = new LinkedList();
             list.Head = n1;
