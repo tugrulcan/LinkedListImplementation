@@ -25,7 +25,17 @@ namespace LinkedListImplementation
 
         public override string DisplayElements()
         {
-            throw new NotImplementedException();
+            string result = "";
+
+            Node tmpCurrentNode = Head;
+            while(tmpCurrentNode!=null)
+            {
+                result += tmpCurrentNode.Data.ToString() + " ";
+                tmpCurrentNode = tmpCurrentNode.Next;
+            }
+            
+
+            return result;
         }
 
         public override Node GetElement(int position)

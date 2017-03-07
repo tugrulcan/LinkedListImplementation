@@ -8,6 +8,35 @@ namespace LinkedListUnitTestProject
     public class LinkedListUnitTest
     {
         [TestMethod]
+        public void DoesDisplayElementsMethodShowElementsOfListCorrectlyWhenListIsNotEmpty()
+        {
+            Node n1 = new Node() { Data = 1 };
+            Node n2 = new Node() { Data = 2 };
+            n1.Next = n2;
+            n2.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 2;
+
+            string expectedResult = "1 2 ";
+            string actualResult = list.DisplayElements();
+
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
+
+        [TestMethod]
+        public void DoesDisplayElementsMethodShowElementsOfListCorrectlyWhenListIsEmpty()
+        {
+            LinkedList list = new LinkedList();
+            string expectedResult = "";
+            string actualResult = list.DisplayElements();
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
         public void DoesInsertFirstMethodAddElementToHeadOfListWhenListIsNotEmpty()
         {
             Node n1 = new Node() { Data = 1 };
@@ -27,6 +56,7 @@ namespace LinkedListUnitTestProject
             Assert.AreEqual(list.Head.Next.Next, n2);
             Assert.IsNull(list.Head.Next.Next.Next);
         }
+
         [TestMethod]
         public void DoesInsertFirstMethodAddElementToHeadOfListWhenListIsEmpty()
         {
@@ -37,7 +67,7 @@ namespace LinkedListUnitTestProject
             Assert.AreEqual(list.Head.Data, 0);
             Assert.IsNull(list.Head.Next);
 
+        }
 
         }
-    }
 }
