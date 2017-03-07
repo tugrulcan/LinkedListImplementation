@@ -27,5 +27,17 @@ namespace LinkedListUnitTestProject
             Assert.AreEqual(list.Head.Next.Next, n2);
             Assert.IsNull(list.Head.Next.Next.Next);
         }
+        [TestMethod]
+        public void DoesInsertFirstMethodAddElementToHeadOfListWhenListIsEmpty()
+        {
+            LinkedList list = new LinkedList();
+            list.InsertFirst(0);
+
+            Assert.AreEqual(list.Size, 1);
+            Assert.AreEqual(list.Head.Data, 0);
+            Assert.IsNull(list.Head.Next);
+
+
+        }
     }
 }

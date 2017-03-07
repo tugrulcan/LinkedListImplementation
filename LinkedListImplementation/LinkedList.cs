@@ -33,6 +33,7 @@ namespace LinkedListImplementation
             throw new NotImplementedException();
         }
 
+
         public override void InsertFirst(int value)
         {
             Node newHead = new Node() { Data = value };
@@ -42,6 +43,7 @@ namespace LinkedListImplementation
             this.Size++;
 
         }
+
 
         public override void InsertLast(int value)
         {
