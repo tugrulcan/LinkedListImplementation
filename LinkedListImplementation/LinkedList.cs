@@ -28,12 +28,12 @@ namespace LinkedListImplementation
             string result = "";
 
             Node tmpCurrentNode = Head;
-            while(tmpCurrentNode!=null)
+            while (tmpCurrentNode != null)
             {
                 result += tmpCurrentNode.Data.ToString() + " ";
                 tmpCurrentNode = tmpCurrentNode.Next;
             }
-            
+
 
             return result;
         }
@@ -57,7 +57,22 @@ namespace LinkedListImplementation
 
         public override void InsertLast(int value)
         {
-            throw new NotImplementedException();
+            if (this.Head == null)
+            {
+                this.InsertFirst(value);
+            }
+            else
+            {
+                Node newLast = new Node() { Data = value };
+                Node currentNode = this.Head;
+                while (currentNode.Next != null)
+                {
+                    currentNode = currentNode.Next;
+                }
+                currentNode.Next = newLast;
+                Size++;
+            }
+
         }
 
         public override void InsertPos(int position, int value)
