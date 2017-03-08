@@ -81,7 +81,7 @@ namespace LinkedListImplementation
             {
                 throw new IndexOutOfRangeException();
             }
-            else if (position == 0)
+            else if (position == 0 || this.Head == null)
             {
                 this.InsertFirst(value);
             }
@@ -89,12 +89,9 @@ namespace LinkedListImplementation
             {
                 Node newNode = new Node() { Data = value };
 
-                Node currentNode = this.Head;
-                
-                for (int counter = 0; counter +1 < position ; counter++)
-                {
+                Node currentNode = this.Head;               
+                for (int counter = 0; counter < position - 1 ; counter++)
                     currentNode = currentNode.Next;
-                }
 
                 newNode.Next = currentNode.Next;
                 currentNode.Next = newNode;
