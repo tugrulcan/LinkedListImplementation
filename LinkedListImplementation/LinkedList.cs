@@ -45,7 +45,26 @@ namespace LinkedListImplementation
 
         public override void DeletePos(int position)
         {
-            throw new NotImplementedException();
+            if (position<0 || position +1 > this.Size || this.Head == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else if (position == 0)
+            {
+                this.DeleteFirst();
+            }
+            else
+            {
+                Node currentNode = this.Head;
+                Node lastPreviousNode = null;
+                for (int counter = 0; counter < position; counter++)
+                {
+                    lastPreviousNode = currentNode;
+                    currentNode = currentNode.Next;
+                }
+                lastPreviousNode.Next = currentNode.Next;
+                this.Size--;
+            }
         }
 
         public override string DisplayElements()

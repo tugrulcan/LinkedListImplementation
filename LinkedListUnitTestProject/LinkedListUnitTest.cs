@@ -327,12 +327,12 @@ namespace LinkedListUnitTestProject
         }
 
         [TestMethod]
-        public void DoesDeletePosMethodDeleteTheDesiredElementinListWhenListHasOneElement()
+        public void DoesDeletePosMethodDeleteTheDesiredElementinListWhenListIsNotEmpty()
         {
             Node n4 = new Node() { Data = 142, Next = null };
-            Node n3 = new Node() { Data = 122 , Next = n4};
-            Node n2 = new Node() { Data = 11 , Next= n3};
-            Node n1 = new Node() { Data = 34, Next =n2 };
+            Node n3 = new Node() { Data = 122, Next = n4 };
+            Node n2 = new Node() { Data = 11, Next = n3 };
+            Node n1 = new Node() { Data = 34, Next = n2 };
 
             LinkedList list = new LinkedList() { Head = n1, Size = 4 };
 
@@ -340,6 +340,20 @@ namespace LinkedListUnitTestProject
             Assert.AreEqual(3, list.Size);
 
             string expectedResult = "34 11 142 ";
+            string actualResult = list.DisplayElements();
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        public void DoesDeletePosMethodDeleteTheZerothElementinListWhenListHasOneElement()
+        {
+            Node n1 = new Node() { Data = 34, Next = null };
+            LinkedList list = new LinkedList() { Head = n1, Size = 1 };
+
+            list.DeletePos(0);
+            Assert.AreEqual(0, list.Size);
+
+            string expectedResult = "";
             string actualResult = list.DisplayElements();
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -359,7 +373,7 @@ namespace LinkedListUnitTestProject
         {
             Node n1 = new Node() { Data = 10 };
             n1.Next = null;
-            LinkedList list = new LinkedList() { Head = n1, Size=1};
+            LinkedList list = new LinkedList() { Head = n1, Size = 1 };
             list.DeletePos(-2);
             Assert.AreEqual(1, list.Size);
         }
