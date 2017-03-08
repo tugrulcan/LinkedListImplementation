@@ -111,5 +111,81 @@ namespace LinkedListUnitTestProject
             Assert.IsNull(list.Head.Next);
 
         }
+
+        [TestMethod]
+        public void DoesInsertPosMethodAddElementAtDesiredPositionOfListWhenListIsEmpty()
+        {
+            Node n1 = new Node() { Data = 1 };
+            Node n2 = new Node() { Data = 2 };
+            n1.Next = n2;
+            n2.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 2;
+
+            list.InsertPos(1, 15);
+            Assert.AreEqual(list.Size, 3);
+
+            string expectedResult = "1 15 2 ";
+            string actualResult = list.DisplayElements();
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
+
+        [TestMethod]
+        public void DoesInsertPosMethodAddElementAtZerothPositionOfListWhenListIsNotEmpty()
+        {
+            Node n1 = new Node() { Data = 1 };
+            Node n2 = new Node() { Data = 2 };
+            n1.Next = n2;
+            n2.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 2;
+
+            list.InsertPos(0, 10);
+            Assert.AreEqual(list.Size, 3);
+
+            string expectedResult = "10 1 2 ";
+            string actualResult = list.DisplayElements();
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesInsertPosMethodThrowErrorWhenNegativePositionPassed()
+        {
+            LinkedList list = new LinkedList();
+            list.InsertPos(-3, 5);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesInsertPosMethodThrowErrorWhenPositionValueIsLargerThanSizeAndListIsNotEmpty()
+        {
+            Node n1 = new Node() { Data = 1 };
+            Node n2 = new Node() { Data = 2 };
+            n1.Next = n2;
+            n2.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 2;
+
+            list.InsertPos(3, 5);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesInsertPosMethodThrowErrorWhenPositionLargerThanSizeAndListIsEmpty()
+        {
+            LinkedList list = new LinkedList();
+            list.InsertPos(5, 10);
+        }
+
     }
 }
