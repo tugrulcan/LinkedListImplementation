@@ -275,5 +275,56 @@ namespace LinkedListUnitTestProject
             string actualResult = list.DisplayElements();
             Assert.AreEqual(expectedResult, actualResult);
         }
-    }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesDeleteLastMethodDeleteTheLastElementinListWhenListIsEmpty()
+        {
+            LinkedList list = new LinkedList();
+            list.DeleteLast();
+            Assert.AreEqual(0, list.Size);
+        }
+
+        [TestMethod]
+        public void DoesDeleteLastMethodDeleteTheLastElementinListWhenListIsNotEmpty()
+        {
+            Node n1 = new Node() { Data = 34 };
+            Node n2 = new Node() { Data = 11 };
+            Node n3 = new Node() { Data = 142 };
+            n1.Next = n2;
+            n2.Next = n3;
+            n3.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 3;
+
+            list.DeleteLast();
+            Assert.AreEqual(2, list.Size);
+
+            string expectedResult = "34 11 ";
+            string actualResult = list.DisplayElements();
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        public void DoesDeleteLastMethodDeleteTheLastElementinListWhenListHasOneElement()
+        {
+            Node n1 = new Node() { Data = 34 };
+            n1.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 1;
+
+            list.DeleteLast();
+            Assert.AreEqual(0, list.Size);
+
+            string expectedResult = "";
+            string actualResult = list.DisplayElements();
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        }
 }
