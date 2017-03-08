@@ -53,8 +53,7 @@ namespace LinkedListImplementation
             this.Size++;
 
         }
-
-
+        
         public override void InsertLast(int value)
         {
             if (this.Head == null)
@@ -69,6 +68,7 @@ namespace LinkedListImplementation
                 {
                     currentNode = currentNode.Next;
                 }
+
                 currentNode.Next = newLast;
                 Size++;
             }
@@ -77,7 +77,29 @@ namespace LinkedListImplementation
 
         public override void InsertPos(int position, int value)
         {
-            throw new NotImplementedException();
+            if (position < 0 || position + 1 > this.Size)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else if (position == 0)
+            {
+                this.InsertFirst(value);
+            }
+            else
+            {
+                Node newNode = new Node() { Data = value };
+
+                Node currentNode = this.Head;
+                
+                for (int counter = 0; counter +1 < position ; counter++)
+                {
+                    currentNode = currentNode.Next;
+                }
+
+                newNode.Next = currentNode.Next;
+                currentNode.Next = newNode;
+                this.Size++;
+            }
         }
     }
 }
