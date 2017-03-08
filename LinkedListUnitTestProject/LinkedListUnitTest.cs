@@ -127,7 +127,7 @@ namespace LinkedListUnitTestProject
             list.Size = 3;
 
             list.InsertPos(2, 122);
-            Assert.AreEqual(list.Size, 4);
+            Assert.AreEqual(4, list.Size);
 
             string expectedResult = "34 11 122 142 ";
             string actualResult = list.DisplayElements();
@@ -189,5 +189,91 @@ namespace LinkedListUnitTestProject
             list.InsertPos(5, 10);
         }
 
+        [TestMethod]
+        public void HasGetElementMethodRetrievedTheExpectedNodeWhenListIsNotEmpty()
+        {
+            Node n1 = new Node() { Data = 34 };
+            Node n2 = new Node() { Data = 11 };
+            Node n3 = new Node() { Data = 142 };
+            n1.Next = n2;
+            n2.Next = n3;
+            n3.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 3;
+
+            Node expected = n3;
+            Node actualResult = list.GetElement(2);
+            Assert.AreEqual(expected.Data, actualResult.Data);
+            Assert.AreEqual(list.Size, 3);
+
+            expected = n1;
+            actualResult = list.GetElement(0);
+            Assert.AreEqual(expected.Data, actualResult.Data);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesGetElementMethodThrowErrorWhenListIsEmpty()
+        {
+            LinkedList list = new LinkedList();
+            list.GetElement(0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesGetElementMethodThrowErrorWhenPositionIsLargerThanSizeAndListIsNotEmpty()
+        {
+            Node n1 = new Node() { Data = 1 };
+            Node n2 = new Node() { Data = 2 };
+            n1.Next = n2;
+            n2.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 2;
+
+            list.GetElement(2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesGetElementMethodThrowErrorWhenPositionIsNegative()
+        {
+            LinkedList list = new LinkedList();
+            list.GetElement(-5);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void DoesDeleteFirstMethodDeleteTheBeginningElementofListWhenListIsEmpty()
+        {
+            LinkedList list = new LinkedList();
+            list.DeleteFirst();
+            Assert.AreEqual(0, list.Size);
+        }
+
+        [TestMethod]
+        public void DoesDeleteFirstMethodDeleteTheBeginningElementofListWhenListIsNotEmpty()
+        {
+            Node n1 = new Node() { Data = 34 };
+            Node n2 = new Node() { Data = 11 };
+            Node n3 = new Node() { Data = 142 };
+            n1.Next = n2;
+            n2.Next = n3;
+            n3.Next = null;
+
+            LinkedList list = new LinkedList();
+            list.Head = n1;
+            list.Size = 3;
+
+            list.DeleteFirst();
+            Assert.AreEqual(2, list.Size);
+
+            string expectedResult = "11 142 ";
+            string actualResult = list.DisplayElements();
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }

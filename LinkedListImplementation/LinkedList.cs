@@ -10,7 +10,13 @@ namespace LinkedListImplementation
     {
         public override void DeleteFirst()
         {
-            throw new NotImplementedException();
+            if (this.Head == null)
+                throw new IndexOutOfRangeException();
+            else
+            {
+                this.Head = this.Head.Next;
+                this.Size--;
+            }
         }
 
         public override void DeleteLast()
@@ -40,7 +46,23 @@ namespace LinkedListImplementation
 
         public override Node GetElement(int position)
         {
-            throw new NotImplementedException();
+            if (position < 0 || position + 1 > this.Size)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else if (this.Head == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else
+            {
+                Node currentNode = this.Head;
+                for (int counter = 0; counter < position; counter++)
+                {
+                    currentNode = currentNode.Next;
+                }
+                return currentNode;
+            }
         }
 
 
@@ -53,7 +75,7 @@ namespace LinkedListImplementation
             this.Size++;
 
         }
-        
+
         public override void InsertLast(int value)
         {
             if (this.Head == null)
@@ -89,14 +111,41 @@ namespace LinkedListImplementation
             {
                 Node newNode = new Node() { Data = value };
 
-                Node currentNode = this.Head;               
-                for (int counter = 0; counter < position - 1 ; counter++)
+                Node currentNode = this.Head;
+                Node lastPreviousNode = this.Head;
+                for (int counter = 0; counter < position; counter++)
+                {
+                    lastPreviousNode = currentNode;
                     currentNode = currentNode.Next;
+                }
 
-                newNode.Next = currentNode.Next;
-                currentNode.Next = newNode;
+                newNode.Next = currentNode;
+                lastPreviousNode.Next = newNode;
                 this.Size++;
             }
+
+            #region Çalışan ama ilk elemanı değiştirmeyen kod bloğu
+
+            //Node newNode = new Node { Data = value };
+            //if (this.Head == null)
+            //{
+            //    this.InsertFirst(value);
+            //}
+
+            //Node posNode = this.Head;
+            ////counter 1'den mi başlamalı? 
+            //for (int counter = 1; counter < position; counter++)
+            //{
+            //    posNode = posNode.Next;
+            //}
+
+            //Node tempNext = posNode.Next;
+            //posNode.Next = newNode;
+            //newNode.Next = tempNext;
+            //this.Size++;
+
+            #endregion
+
         }
     }
 }
