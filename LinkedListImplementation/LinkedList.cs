@@ -21,7 +21,26 @@ namespace LinkedListImplementation
 
         public override void DeleteLast()
         {
-            throw new NotImplementedException();
+            if (this.Head == null)
+                throw new IndexOutOfRangeException();
+            else if (this.Head.Next == null)
+            {
+                this.DeleteFirst();
+            }
+            else
+            {
+                Node currentNode = this.Head;
+                Node lastPrevious = this.Head; 
+                while (currentNode.Next != null)
+                {
+                    lastPrevious = currentNode;
+                    currentNode = currentNode.Next;
+                }
+
+                lastPrevious.Next = null;
+                currentNode = null;
+                this.Size--;
+            }
         }
 
         public override void DeletePos(int position)
