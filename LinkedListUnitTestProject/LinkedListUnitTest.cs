@@ -389,5 +389,40 @@ namespace LinkedListUnitTestProject
             Assert.AreEqual(0, list.Size);
         }
 
+        [TestMethod]
+        public void TestingWithMultipleOperations()
+        {
+            LinkedList list = new LinkedList();
+            list.InsertFirst(4);
+            list.InsertLast(5);
+            string expected = "4 5 ";
+            string actual = list.DisplayElements();
+            Assert.AreEqual(expected, actual);
+
+            list.InsertFirst(1);
+            list.InsertFirst(2);
+            list.InsertFirst(8);
+            expected = "8 2 1 4 5 ";
+            actual = list.DisplayElements();
+            Assert.AreEqual(expected, actual);
+
+            list.DeleteFirst();
+            expected = "2 1 4 5 ";
+            actual = list.DisplayElements();
+            Assert.AreEqual(expected, actual);
+
+            list.DeleteLast();
+            expected = "2 1 4 ";
+            actual = list.DisplayElements();
+            Assert.AreEqual(expected, actual);
+
+            list.DeleteLast();
+            list.DeleteLast();
+            expected = "2 ";
+            actual = list.DisplayElements();
+            Assert.AreEqual(expected, actual);
+        }
+
+       
     }
 }
